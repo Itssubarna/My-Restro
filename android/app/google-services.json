@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "946707645064",
+    "project_id": "mero-app-93817",
+    "storage_bucket": "mero-app-93817.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946707645064:android:b912ba3b7df4985e95153d",
+        "android_client_info": {
+          "package_name": "com.example.bmi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDThe05lLYXuaCr744Ffs9gdjQjhGMrgLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
