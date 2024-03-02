@@ -3,6 +3,7 @@ import 'package:bmi/tab/Momo_tab.dart';
 import 'package:bmi/tab/Pizza_tab.dart';
 import 'package:bmi/tab/biryani_tab.dart';
 import 'package:bmi/utils/my_tab.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  Future<FirebaseApp> _initializeFirebase() async{
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
 
 List <Widget> myTabs = [
   Mytab(

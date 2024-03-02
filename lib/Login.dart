@@ -1,4 +1,5 @@
 import 'package:bmi/HomePage.dart';
+import 'package:bmi/Signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,20 +16,7 @@ class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _Login() async {
-    try {
-      final UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-      // Navigate to HomeScreen if login is successful
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-    } catch (e) {
-      // Handle login errors here
-      print("Failed to sign in: $e");
-      // You can show an error message to the user using a snackbar or dialog
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +57,24 @@ class _LoginState extends State<Login> {
              
             ),
           ),
+
           SizedBox(
             height:30,
           ),
-          Text('Forgot Password?',
-          style: TextStyle(color: Colors.blue),),
-          SizedBox(
+           Container(
+            child: RawMaterialButton(
+            onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Signup()));
+            },
+            child: const Text('Dont have an account? Sign Up!',
+            style: TextStyle(color: Colors.grey,
+            fontSize: 15,fontWeight: FontWeight.bold),
+            )),
+          ),
+
+
+
+          const SizedBox(
             height: 70,
           ),
           Container(
@@ -83,10 +83,15 @@ class _LoginState extends State<Login> {
               fillColor: Color.fromARGB(255, 99, 240, 228),
               padding: EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              onPressed: () 
-              {
-                Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));
-              },
+            onPressed: () {
+              FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text)
+                .then((value) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));
+                })
+                .catchError((error) {
+                  print("Error: ${error.toString()}");
+                });
+            },
             child: const Text('Login',
             style: TextStyle(color: Colors.grey,
             fontSize: 15,fontWeight: FontWeight.bold),
